@@ -1,0 +1,11 @@
+.counter {
+  padding: 15px;
+}
+.btn {
+    margin-left: 10px;
+    cursor: pointer;
+}
+.span {
+    display: flex;
+    font-size: 18px;
+}
