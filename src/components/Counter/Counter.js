@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Statistic from './Statistic/Statistic';
 import styles from './Counter.module.css';
 
 class Counter extends Component {
@@ -39,14 +40,14 @@ class Counter extends Component {
   };
 
   countTotalFeedback = () => {
-    const {good, neutral, bad} = this.state
+    const { good, neutral, bad } = this.state;
     // return this.state.good + this.state.neutral + this.state.bad;
     return good + neutral + bad;
   };
 
   countPositiveFeedbackPercentage = () => {
-    const {good, neutral, bad} = this.state
-    return Math.floor((good / (good + neutral + bad)) * 100)
+    const { good, neutral, bad } = this.state;
+    return Math.floor((good / (good + neutral + bad)) * 100);
   };
 
   render() {
@@ -78,14 +79,21 @@ class Counter extends Component {
             Bad
           </button>
         </div>
-        <div>
+        {/* <div>
           <h2>Statistics</h2>
           <span className={styles.span}>Good: {this.state.good}</span>
           <span className={styles.span}>Neutral: {this.state.neutral}</span>
           <span className={styles.span}>Bad: {this.state.bad}</span>
           <span className={styles.span}>Total: {this.countTotalFeedback()}</span>
           <span className={styles.span}>Positive feedback: {this.countPositiveFeedbackPercentage()}%</span>
-        </div>
+        </div> */}
+        <Statistic
+          good={this.state.good}
+          neutral={this.state.neutral}
+          bad={this.state.bad}
+          total={this.countTotalFeedback()}
+          positivePercentage={this.countPositiveFeedbackPercentage()}
+        />
       </div>
     );
   }
