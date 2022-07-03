@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Statistic from './Statistic/Statistic';
+// import Statistic from './Statistic/Statistic';
 import styles from './Counter.module.css';
 
 class Counter extends Component {
@@ -9,12 +9,7 @@ class Counter extends Component {
     bad: 0,
   };
 
-  incrementGood = event => {
-    // console.log(event)
-    // console.log(event.target.innerText.toLowerCase());
-    // const currentKey = event.target.innerText.toLowerCase()
-    // console.log(Object.keys(this.state))
-
+  incrementGood = () => {
     this.setState(current => {
       return {
         good: current.good + 1,
@@ -41,7 +36,6 @@ class Counter extends Component {
 
   countTotalFeedback = () => {
     const { good, neutral, bad } = this.state;
-    // return this.state.good + this.state.neutral + this.state.bad;
     return good + neutral + bad;
   };
 
@@ -79,38 +73,28 @@ class Counter extends Component {
             Bad
           </button>
         </div>
-        {/* <div>
+        <div>
           <h2>Statistics</h2>
           <span className={styles.span}>Good: {this.state.good}</span>
           <span className={styles.span}>Neutral: {this.state.neutral}</span>
           <span className={styles.span}>Bad: {this.state.bad}</span>
-          <span className={styles.span}>Total: {this.countTotalFeedback()}</span>
-          <span className={styles.span}>Positive feedback: {this.countPositiveFeedbackPercentage()}%</span>
-        </div> */}
-        <Statistic
+          <span className={styles.span}>
+            Total: {this.countTotalFeedback()}
+          </span>
+          <span className={styles.span}>
+            Positive feedback: {this.countPositiveFeedbackPercentage()}%
+          </span>
+        </div>
+        {/* <Statistic
           good={this.state.good}
           neutral={this.state.neutral}
           bad={this.state.bad}
           total={this.countTotalFeedback()}
           positivePercentage={this.countPositiveFeedbackPercentage()}
-        />
+       /> */}
       </div>
     );
   }
 }
 
 export default Counter;
-
-// export default class App extends Component {
-// state = {
-//   good: 0,
-//   neutral: 0,
-//   bad: 0,
-// };
-
-//     render() {
-//       return ;
-//     }
-//   }
-
-//tttttttttttjg
