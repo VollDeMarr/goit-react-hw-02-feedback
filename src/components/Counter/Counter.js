@@ -1,6 +1,12 @@
 import { Component } from 'react';
-// import Statistic from './Statistic/Statistic';
+
+import Statistics from './Statistics/Statistics';
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
+import Section from './Section/Section';
+
 import styles from './Counter.module.css';
+
+const options = ['good', 'neutral', 'bad'];
 
 class Counter extends Component {
   state = {
@@ -9,27 +15,11 @@ class Counter extends Component {
     bad: 0,
   };
 
-  incrementGood = () => {
-    this.setState(current => {
-      return {
-        good: current.good + 1,
-      };
-    });
-  };
-
-  incrementNeutral = () => {
-    this.setState(current => {
-      return {
-        neutral: current.neutral + 1,
-      };
-    });
-  };
-
-  incrementBad = () => {
-    this.setState(current => {
+  increment = prop => {
+    this.setState(prevState => {
       this.countTotalFeedback();
       return {
-        bad: current.bad + 1,
+        [prop]: prevState[prop] + 1,
       };
     });
   };
@@ -47,51 +37,20 @@ class Counter extends Component {
   render() {
     return (
       <div className={styles.counter}>
-        <h1>Please leave feedback</h1>
+        <Section title="Please leave feedback">
+          <FeedbackOptions options={options} onLeaveFeedback={this.increment} />
+        </Section>
         <div>
-          <button
-            className={styles.btn}
-            type="button"
-            data="good"
-            onClick={this.incrementGood}
-          >
-            Good
-          </button>
-          <button
-            className={styles.btn}
-            type="button"
-            data="neutral"
-            onClick={this.incrementNeutral}
-          >
-            Neutral
-          </button>
-          <button
-            className={styles.btn}
-            type="button"
-            onClick={this.incrementBad}
-          >
-            Bad
-          </button>
+          <Section title="Statistics">
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={this.countTotalFeedback}
+              positivePercentage={this.countPositiveFeedbackPercentage}
+            ></Statistics>
+          </Section>
         </div>
-        <div>
-          <h2>Statistics</h2>
-          <span className={styles.span}>Good: {this.state.good}</span>
-          <span className={styles.span}>Neutral: {this.state.neutral}</span>
-          <span className={styles.span}>Bad: {this.state.bad}</span>
-          <span className={styles.span}>
-            Total: {this.countTotalFeedback()}
-          </span>
-          <span className={styles.span}>
-            Positive feedback: {this.countPositiveFeedbackPercentage()}%
-          </span>
-        </div>
-        {/* <Statistic
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={this.countTotalFeedback()}
-          positivePercentage={this.countPositiveFeedbackPercentage()}
-       /> */}
       </div>
     );
   }
